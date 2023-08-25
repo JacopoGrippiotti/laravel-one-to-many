@@ -31,9 +31,9 @@
                   type:
                 </label>
                 
-                <select class="form-select mb-5" aria-label="Default select example" name='types' id='types' >
-                  @foreach ($arrayTypes as $arraytype )
-                    <option value="{{$arraytype}}">{{$arraytype}}</option>
+                <select class="form-select mb-5" aria-label="Default select example" name='type_id' id='type_id' >
+                  @foreach ($typeIds as $typeId )
+                    <option value="{{$typeId->id}}">{{$typeId->name}}</option>
                   @endforeach                  
                 </select>                
                 

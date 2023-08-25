@@ -19,6 +19,12 @@
                     <input type="text" class="form-control" id="title" placeholder="Insert your project's title" name="title" value="{{ old( 'title' , $project->title) }}">
                 </div>
 
+                <select class="form-select mb-5" aria-label="Default select example" name='type_id' id='type_id' value="{{ old( 'type_id' , $project->type_id) }}" >
+                  @foreach ($typeIds as $typeId )
+                    <option value="{{$typeId->id}}" {{$project->type->id == $typeId->id ? 'selected': ''}}>{{$typeId->name}}</option>
+                  @endforeach                  
+                </select>                
+                
                 @error('url')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
