@@ -23,9 +23,10 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Type $type)
     {
-        return view('admin.projects.create');
+        $arrayTypes = Type::all()->pluck('name');
+        return view('admin.projects.create', compact('arrayTypes'));
     }
 
     /**
@@ -37,7 +38,7 @@ class ProjectController extends Controller
         
         $data = $request->validate([
             'title' => ['required', 'unique:projects','min:3', 'max:255'],
-            'url' => ['url:https'],
+            'url' => ['required'],
             'image' => ['image'],
             'content' => ['required', 'min:10'],
         ]);
@@ -79,7 +80,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:3', 'max:255', Rule::unique('projects')->ignore($project->id)],
-            'url' => ['url:http'],
+            'url' => ['required'],
             'image' => ['image', 'max:512'],
             'content' => ['required', 'min:10'],
         ]);
