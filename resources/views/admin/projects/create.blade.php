@@ -26,6 +26,16 @@
                     </label>
                     <input type="file" name="image" id="image" class="form-control" placeholder="Upload your image" value="{{ old('image', '') }}">
                 </div>
+
+                <label for='types' class='form-label'>
+                  type:
+                </label>
+                
+                <select class="form-select mb-5" aria-label="Default select example" name='types' id='types' >
+                  @foreach ($arrayTypes as $arraytype )
+                    <option value="{{$arraytype}}">{{$arraytype}}</option>
+                  @endforeach                  
+                </select>                
                 
                 @error('url')
                     <div class="alert alert-danger">{{ $message }}</div>
