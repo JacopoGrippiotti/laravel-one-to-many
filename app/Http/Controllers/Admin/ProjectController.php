@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -23,10 +24,10 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Type $type)
+    public function create()
     {
-        $arrayTypes = Type::all()->pluck('name');
-        return view('admin.projects.create', compact('arrayTypes'));
+        $typeIds = Type::all();
+        return view('admin.projects.create', compact('typeIds'));
     }
 
     /**
@@ -41,6 +42,7 @@ class ProjectController extends Controller
             'url' => ['required'],
             'image' => ['image'],
             'content' => ['required', 'min:10'],
+            'type_id'=>['required']
         ]);
         
         
@@ -70,7 +72,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $typeIds = Type::all();
+        return view('admin.projects.edit', compact('project'), compact('typeIds'));
     }
 
     /**
